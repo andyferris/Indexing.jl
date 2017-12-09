@@ -48,6 +48,6 @@ julia> getindices(d, (:a, :c)) # Preserves type/keys of index collection - a tup
 
 This package is a work-in-progress. To complete the package, we need to at least:
 
-  * Provide `views`, a lazy version of `view`.
+  * Provide a lazy version of `getindices`.
   * Make `dotsetindices!` do broadcasting on arrays.
   * Performance improvements and propagation of `@inbounds` annotations.
