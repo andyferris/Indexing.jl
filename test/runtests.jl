@@ -1,5 +1,9 @@
 using Indexing
 using Base.Test
 
-# write your own tests here
-@test 1 == 2
+@testset "getindices" begin
+   d = Dict(:a => "Alice", :b => "Bob", :c => "Charlie")
+   @test getindices(d, [:a, :c]) == ["Alice", "Charlie"]
+   @test getindices(d, (:a, :c)) == ("Alice", "Charlie")
+   @test_broken getindices(d, Dict(:a => :a, :c => :c)) == Dict(:a => "Alice", :c => "Charlie")
+end
