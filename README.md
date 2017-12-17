@@ -16,9 +16,7 @@ To acheive this, we introduce new functions:
  * `getindices` - generalizes `getindex` to multiple indices.
  * `setindices!` - generalizes `setindex!` to multiple indices. The same value is set for
    each index.
- * `dotsetindices!` - broadcasted version of `setindices!`, where a different value can be
-   set for each index.
-
+ 
 ## Quick start
 
 Please note that this package is still under development and is not fully functional. 
@@ -42,12 +40,29 @@ julia> getindices(d, [:a, :c]) # Preserves type/keys of index collection - an ar
 
 julia> getindices(d, (:a, :c)) # Preserves type/keys of index collection - a tuple of length 2
 ("Alice", "Charlie")
+
+julia> getindices(d, Dict("Wife" => :a, "Husband" => :c)) # Preserves type/keys of index collection - a dictionary with keys "Wife" and "Husband"
+Dict{String,String} with 2 entries:
+  "Wife"    => "Alice"
+  "Husband" => "Charlie"
 ```
 
 ## TODO
 
 This package is a work-in-progress. To complete the package, we need to at least:
 
-  * Provide a lazy version of `getindices`.
-  * Make `dotsetindices!` do broadcasting on arrays.
+  * Make sure everything works for named tuples.
+  * Make `view` work for dictionaries.
   * Performance improvements and propagation of `@inbounds` annotations.
+
+
+## Future thoughts
+
+Perhaps these could be intergrated into future Julia syntax. One simple suggestion:
+
+```julia
+a.[inds]           --> getindices(a, inds)
+a.[inds] = v       --> setindices!(a, v, inds)
+a[i] .= v          --> broadcast!(identity, a[i], v)
+a.[inds] .= values --> broadcast over inds and values (like the current `dotview`, for above, but works on dictionaries)
+```
