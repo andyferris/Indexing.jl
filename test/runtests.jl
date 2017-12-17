@@ -44,6 +44,5 @@ end
 
     v4 = copy(v)
     setindices!(v4, 20, Dict(:a => 1, :c => 3))
-    @test v4 == [20, 12, 20]
-     
+    @test v4 == [20, 12, 20]  
 end
