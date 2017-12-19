@@ -63,3 +63,26 @@ end
     setindices!(v5, 20, (a = 1, c = 3))
     @test v5 == [20, 12, 20]
 end
+
+@testset "view" begin
+    d = Dict(:a => "Alice", :b => "Bob", :c => "Charlie")
+    
+    @test view(d, [:a, :c])::ViewArray == ["Alice", "Charlie"]
+    @test view(d, Dict(:aa => :a, :cc => :c))::ViewDict == Dict(:aa => "Alice", :cc => "Charlie")
+
+    av = view(d, [:a, :c])
+    av[1] = "Someone"
+    @test d == Dict(:a => "Someone", :b => "Bob", :c => "Charlie")
+
+    dv = view(d, Dict(:aa => :a, :cc => :c))
+    dv[:aa] = "No-one"
+    @test d == Dict(:a => "No-one", :b => "Bob", :c => "Charlie")
+
+    v = [11, 12, 13]
+
+    @test view(v, Dict(:a =>1 , :c => 3))::ViewDict == Dict(:a => 11, :c => 13)
+    
+    dv2 = view(v, Dict(:a =>1 , :c => 3))
+    dv2[:a] = 21
+    @test v == [21, 12, 13]
+end

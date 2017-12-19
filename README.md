@@ -11,11 +11,12 @@
 This package defines functions for getting multiple indices out of dictionaries, tuples,
 etc, extending this ability beyond `AbstractArray`.
 
-To acheive this, we introduce new functions:
+To acheive this, we introduce new functions and methods:
 
- * `getindices` - generalizes `getindex` to multiple indices.
- * `setindices!` - generalizes `setindex!` to multiple indices. The same value is set for
-   each index.
+ * `getindices(container, indices)` - generalizes `getindex(container, index)` to multiple indices.
+ * `setindices!(container, value, indices)` - generalizes `setindex!(container, value, index)` to multiple indices. The same `value` is set for
+   each index in `indices`.
+ * `view(container, indices)` - lazy versions of `getindices(container, indices)` defined for dictionaries.
  
 ## Quick start
 
@@ -47,22 +48,26 @@ Dict{String,String} with 2 entries:
   "Husband" => "Charlie"
 ```
 
+Similarly, `view` works as a lazy version of `getindices`, and `setindices!` works by
+setting *the same* value to each specified index.
+
 ## TODO
 
-This package is a work-in-progress. To complete the package, we need to at least:
+This package is a work-in-progress. To complete the package, we need to:
 
-  * Make sure everything works for named tuples.
-  * Make `view` work for dictionaries.
   * Performance improvements and propagation of `@inbounds` annotations.
-
 
 ## Future thoughts
 
-Perhaps these could be intergrated into future Julia syntax. One simple suggestion:
+Perhaps these could be intergrated into future Julia syntax. One suggestion:
 
 ```julia
+a[i]               --> getindex(a, i)       # scalar only
 a.[inds]           --> getindices(a, inds)
+a[i] = v           --> setindex!(a, v, i)   # scalar only
 a.[inds] = v       --> setindices!(a, v, inds)
 a[i] .= v          --> broadcast!(identity, a[i], v)
-a.[inds] .= values --> broadcast over inds and values (like the current `dotview`, for above, but works on dictionaries)
+a.[inds] .= values --> broadcast!(identity, view(a, inds), values)
 ```
+Note the lack of `dotview` and `maybeview`. The last two could support dot-fusion on the RHS.
+Also, the default for `a.[inds]` could potentially move to `view`.

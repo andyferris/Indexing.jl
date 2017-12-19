@@ -3,8 +3,8 @@
 """
 setindices!(container, value, indices)
 
-Store the given `value` at all the indices `i ∈ values(indices)` of `container`. This
-generalizes scalar `setindex!` to dictionaries, etc.
+Store the given `value` at all the indices in `values(indices)` of `container`. This
+generalizes scalar `setindex!` for dictionaries, etc.
 """
 function setindices!(container, value, indices)
     foreach(i -> (container[i] = value), indices)
