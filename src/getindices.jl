@@ -43,8 +43,11 @@ function getindices(container, indices::AbstractDict)
     return out
 end
 
-function getindices(a::AbstractArray, is::Int...)
+# Make a 0-D array instead of scalar
+Base.@propagate_inbounds function getindices(a::AbstractArray, is::Int...)
     out = similar(a, eltype(a), ())
     out[] = a[is...]
     return out
 end
+Base.@propagate_inbounds getindices(a::AbstractArray, is...) = a[is...]
+getindices(a::AbstractVector, ::Colon) = a[:] # Ambiguity
