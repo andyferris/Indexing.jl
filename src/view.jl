@@ -177,4 +177,4 @@ ViewDict{Symbol,Int64,Array{Int64,1},Dict{Symbol,Int64}} with 2 entries:
 """
 view(d, inds::AbstractDict) = ViewDict(d, inds)
 view(d::AbstractArray, inds::AbstractDict) = ViewDict(d, inds) # disambiguation
-parent(d::ViewDict) = v.parent
+parent(d::ViewDict) = d.parent

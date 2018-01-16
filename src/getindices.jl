@@ -34,6 +34,10 @@ function getindices(container, indices)
     return map(i -> container[i], indices)
 end
 getindices(container, ::Colon) = getindices(container, keys(container))
+getindices(t::Tuple, ::Colon) = t
+@static if VERSION > v"0.7-"
+    getindices(nt::NamedTuple, ::Colon) = nt
+end
 
 function getindices(container, indices::AbstractDict)
     out = empty(indices, keytype(indices), _valtype(container))
@@ -42,6 +46,9 @@ function getindices(container, indices::AbstractDict)
     end
     return out
 end
+function getindices(d::AbstractDict, ::Colon)
+    return copy(d)
+end
 
 # Make a 0-D array instead of scalar
 Base.@propagate_inbounds function getindices(a::AbstractArray, is::Int...)
@@ -49,5 +56,7 @@ Base.@propagate_inbounds function getindices(a::AbstractArray, is::Int...)
     out[] = a[is...]
     return out
 end
+
+# Ambiguities
 Base.@propagate_inbounds getindices(a::AbstractArray, is::Union{Int,Colon,AbstractArray}...) = a[is...]
-getindices(a::AbstractVector, ::Colon) = a[:] # Ambiguity
+getindices(a::AbstractVector, ::Colon) = a[:]
