@@ -21,7 +21,7 @@ To acheive this, we introduce new functions and methods:
 ## Quick start
 
 Please note that this package is still under development. However, you can check it out with
-Julia v0.7 or greater, and use it like so:
+Julia v0.6 or greater, and use it like so:
 
 ```
 julia> Pkg.clone("https://github.com/andyferris/Indexing.jl")

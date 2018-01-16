@@ -49,5 +49,5 @@ Base.@propagate_inbounds function getindices(a::AbstractArray, is::Int...)
     out[] = a[is...]
     return out
 end
-Base.@propagate_inbounds getindices(a::AbstractArray, is...) = a[is...]
+Base.@propagate_inbounds getindices(a::AbstractArray, is::Union{Int,Colon,AbstractArray}...) = a[is...]
 getindices(a::AbstractVector, ::Colon) = a[:] # Ambiguity
