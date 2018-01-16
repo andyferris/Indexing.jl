@@ -3,6 +3,7 @@
 *Generized indexing for Julia*
 
 [![Build Status](https://travis-ci.org/andyferris/Indexing.jl.svg?branch=master)](https://travis-ci.org/andyferris/Indexing.jl)
+[![Build status](https://ci.appveyor.com/api/projects/status/1vm5k6cy4jitfns7?svg=true)](https://ci.appveyor.com/project/andyferris/indexing-jl)
 [![Coverage Status](https://coveralls.io/repos/andyferris/Indexing.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/andyferris/Indexing.jl?branch=master)
 [![codecov.io](http://codecov.io/github/andyferris/Indexing.jl/coverage.svg?branch=master)](http://codecov.io/github/andyferris/Indexing.jl?branch=master)
 
