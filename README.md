@@ -1,6 +1,6 @@
 # Indexing
 
-*Generized indexing for Julia*
+*Generalized indexing for Julia*
 
 [![Build Status](https://travis-ci.org/andyferris/Indexing.jl.svg?branch=master)](https://travis-ci.org/andyferris/Indexing.jl)
 [![Build status](https://ci.appveyor.com/api/projects/status/1vm5k6cy4jitfns7?svg=true)](https://ci.appveyor.com/project/andyferris/indexing-jl)
