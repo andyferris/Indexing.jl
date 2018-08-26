@@ -18,7 +18,3 @@ function setindices!(container, value, indices::AbstractDict)
     end
     return container
 end
-
-if VERSION < v"0.7-"
-    setindices!(a::AbstractArray, value, ::Colon) = setindices!(a, value, eachindex(a))
-end

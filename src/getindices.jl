@@ -35,9 +35,7 @@ function getindices(container, indices)
 end
 getindices(container, ::Colon) = getindices(container, keys(container))
 getindices(t::Tuple, ::Colon) = t
-@static if VERSION > v"0.7-"
-    getindices(nt::NamedTuple, ::Colon) = nt
-end
+getindices(nt::NamedTuple, ::Colon) = nt
 
 function getindices(container, indices::AbstractDict)
     out = empty(indices, keytype(indices), _valtype(container))
