@@ -44,6 +44,7 @@ ViewMatrix(a, indices::AbstractMatrix) = ViewMatrix{_valtype(a)}(a, indices)
 # `AbstractArray` implementation (no resizing)
 IndexStyle(::Type{ViewArray{T, N, A, I}}) where {T, N, A, I} = IndexStyle(I)
 axes(a::ViewArray) = axes(a.indices)
+size(a::ViewArray) = size(a.indices)
 
 @propagate_inbounds getindex(a::ViewArray, i::Int) = a.parent[a.indices[i]]
 @propagate_inbounds getindex(a::ViewArray, is::Int...) = a.parent[a.indices[is...]]
@@ -132,11 +133,13 @@ length(d::ViewDict) = length(d.indices)
 @propagate_inbounds getindex(d::ViewDict, i) = d.parent[d.indices[i]]
 @propagate_inbounds setindex!(d::ViewDict, v, i) = (d.parent[d.indices[i]] = v)
 
-start(d::ViewDict) = start(d.indices)
-done(d::ViewDict, i) = done(d.indices, i)
-@propagate_inbounds function next(d::ViewDict, i)
-    (kv, i2) = next(d.indices, i)
-    return (kv.first => d.parent[kv.second], i2)
+function iterate(d::ViewDict, state...)
+    tmp = iterate(d.indices, state...)
+    if tmp === nothing
+        return tmp
+    end
+    (kv, state2) = tmp
+    return (kv.first => d.parent[kv.second], state2)
 end
 
 # Connect with `view`

@@ -125,8 +125,10 @@ end
     @test keys(dv2) ⊆ [:a, :c]
     @test length(keys(dv2)) == 2
     @test haskey(dv2, :a)
+    @test first(dv2) === (:a => 11) || first(dv2) === (:c => 13)
     dv2[:a] = 21
     @test v == [21, 12, 13]
+
 
     @test ViewArray(d, [:b, :c])::ViewArray == ["Bob", "Charlie"]
     @test ViewVector(d, [:b, :c])::ViewVector == ["Bob", "Charlie"]
