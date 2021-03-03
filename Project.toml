@@ -1,0 +1,15 @@
+authors = ["Andy Ferris <ferris.andy@gmail.com>"]
+name = "Indexing"
+uuid = "313cdc1a-70c2-5d6a-ae34-0150d3930a38"
+version = "1.1.1"
+
+[deps]
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
+
+[compat]
+julia = "1"

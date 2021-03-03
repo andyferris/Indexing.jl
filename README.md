@@ -2,9 +2,7 @@
 
 *Generalized indexing for Julia*
 
-[![Build Status](https://travis-ci.org/andyferris/Indexing.jl.svg?branch=master)](https://travis-ci.org/andyferris/Indexing.jl)
-[![Build status](https://ci.appveyor.com/api/projects/status/1vm5k6cy4jitfns7?svg=true)](https://ci.appveyor.com/project/andyferris/indexing-jl)
-[![Coverage Status](https://coveralls.io/repos/andyferris/Indexing.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/andyferris/Indexing.jl?branch=master)
+[![Build Status](https://github.com/andyferris/Indexing.jl/workflows/CI/badge.svg)](https://github.com/andyferris/Indexing.jl/actions?query=workflow%3ACI)
 [![codecov.io](http://codecov.io/github/andyferris/Indexing.jl/coverage.svg?branch=master)](http://codecov.io/github/andyferris/Indexing.jl?branch=master)
 
 -----------
@@ -21,11 +19,12 @@ To acheive this, we introduce new functions and methods:
  
 ## Quick start
 
-Please note that this package is still under development. However, you can check it out with
-Julia v0.6 or greater, and use it like so:
+You can install Indexing via Julia's package manager:
 
 ```
-julia> Pkg.clone("https://github.com/andyferris/Indexing.jl")
+julia> using Pkg
+
+julia> Pkg.add("Indexing")
 
 julia> using Indexing
 
